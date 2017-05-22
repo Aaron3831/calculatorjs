@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 // constructor function called Calculator
-function Calculator(skinName, calculation) {
+function Calculator(skinName) {
   this.skin = skinName;
 }
 
@@ -22,6 +22,20 @@ Calculator.prototype.pingPong = function(goal) {
   return output;
 };
 
+Calculator.prototype.add = function(x,y) {
+  return parseInt(x) + parseInt(y);
+};
+Calculator.prototype.subtract = function(x,y) {
+  return x - y;
+};
+Calculator.prototype.multiply = function(x,y) {
+  return x * y;
+};
+Calculator.prototype.divide = function(x,y) {
+  return x / y;
+};
+
+
 exports.thingy = Calculator;
 
 },{}],2:[function(require,module,exports){
@@ -29,13 +43,25 @@ exports.thingy = Calculator;
 var Whatever = require('./../js/pingpong.js').thingy;
 
 $(document).ready(function() {
-  $('#ping-pong-form').submit(function(event) {
+  $('#calculator').submit(function(event) {
     event.preventDefault();
-    var goal = $('#goal').val();
+    var input1 = $('#input1').val();
+    var input2 = $('#input2').val();
+    var operator = $("input:radio[name=operator]:checked").val();
     var simpleCalculator = new Whatever("hot pink");
-    var output = simpleCalculator.pingPong(goal);
+    if (operator === "add") {
+      result = simpleCalculator.add(input1, input2);
+    } else if (operator === "subtract") {
+      result = simpleCalculator.subtract(input1, input2);
+    } else if (operator === "multiply") {
+      result = simpleCalculator.multiply(input1, input2);
+    } else if (operator === "divide") {
+      result = simpleCalculator.divide(input1, input2);
+    }
+    var simpleCalculator1 = new Whatever("hot pink");
+    var output = simpleCalculator1.pingPong(result);
     output.forEach(function(element) {
-      $('#solution').append("<li>" + element + "</li>");
+      $('#output').append("<li>" + element + "</li>");
     });
   });
 });

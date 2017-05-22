@@ -1,6 +1,6 @@
 
 // constructor function called Calculator
-function Calculator(skinName, calculation) {
+function Calculator(skinName) {
   this.skin = skinName;
 }
 
@@ -21,6 +21,18 @@ Calculator.prototype.pingPong = function(goal) {
   return output;
 };
 
+Calculator.prototype.add = function(x,y) {
+  return parseInt(x) + parseInt(y);
+};
+Calculator.prototype.subtract = function(x,y) {
+  return x - y;
+};
+Calculator.prototype.multiply = function(x,y) {
+  return x * y;
+};
+Calculator.prototype.divide = function(x,y) {
+  return x / y;
+};
 
 
 exports.thingy = Calculator;
